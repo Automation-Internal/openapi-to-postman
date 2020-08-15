@@ -31,7 +31,7 @@ describe('project repository', function () {
 
     describe('package.json JSON data', function () {
       it('must have valid name, description and author', function () {
-        expect(json).to.have.property('name', 'openapi-to-postmanv2');
+        expect(json).to.have.property('name', '@therockstorm/openapi-to-postmanv2');
         expect(json).to.have.property('description',
           'Convert a given OpenAPI specification to Postman Collection v2.0');
         expect(json).to.have.property('author', 'Postman Labs <help@getpostman.com>');
