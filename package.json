@@ -1,6 +1,6 @@
 {
   "name": "@therockstorm/openapi-to-postmanv2",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "Convert a given OpenAPI specification to Postman Collection v2.0",
   "homepage": "https://github.com/postmanlabs/openapi-to-postman",
   "bugs": "https://github.com/postmanlabs/openapi-to-postman/issues",
@@ -16,6 +16,98 @@
     "swagger",
     "oas"
   ],
+  "com_postman_plugin": {
+    "plugin_type": "importer",
+    "name": "OPENAPI 3.0",
+    "source_format": "OPENAPI3.0",
+    "source_format_name": "OpenAPI 3.0",
+    "sample_input": {
+      "type": "json",
+      "data": {
+        "openapi": "3.0.0",
+        "info": {
+          "version": "1.0.0",
+          "title": "Swagger Petstore",
+          "license": {
+            "name": "MIT"
+          }
+        },
+        "servers": [
+          {
+            "url": "http://petstore.swagger.io/v1"
+          }
+        ],
+        "paths": {
+          "/pets": {
+            "get": {
+              "summary": "List all pets",
+              "operationId": "listPets",
+              "tags": [
+                "pets"
+              ],
+              "parameters": [
+                {
+                  "name": "limit",
+                  "in": "query",
+                  "description": "How many items to return at one time (max 100)",
+                  "required": false,
+                  "schema": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "An paged array of pets",
+                  "headers": {
+                    "x-next": {
+                      "description": "A link to the next page of responses",
+                      "schema": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Pets"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "components": {
+          "schemas": {
+            "Pet": {
+              "required": [
+                "id",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "Pets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Pet"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "engines": {
     "node": ">=4"
   },
@@ -54,6 +146,7 @@
     "test-unit": "./scripts/test-unit.sh",
     "test-lint": "./scripts/test-lint.sh",
     "test-system": "./scripts/test-system.sh",
-    "coverage": "nyc report --reporter=html --reporter=text mocha"
+    "coverage": "nyc report --reporter=html --reporter=text mocha",
+    "func": "node ./bin/openapi2postmanv2.js --spec ../../vertex-api/src/main/resources/api-resolved.yml --output ./postman-collection.json --config ../../vertex-api/src/main/resources/openapi-to-postman-config.json --sourceMap ./openapi-to-postman.js.map"
   }
 }
