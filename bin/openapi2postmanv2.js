@@ -108,7 +108,7 @@ function convert(swaggerData) {
     }
     else if (outputFile) {
       let file = path.resolve(outputFile);
-      console.log('Writing to file: ', prettyPrintFlag, file, status); // eslint-disable-line no-console
+      console.log('Writing to file: ', prettyPrintFlag, file, status.result); // eslint-disable-line no-console
       writetoFile(prettyPrintFlag, file, status.output[0].data, sourceMapFile, status.sourceMap);
     }
     else {
