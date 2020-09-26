@@ -24451,12 +24451,12 @@ function extend() {
       ipv6: '[a-f\\d]{4}(:[a-f\\d]{4}){7}',
       uri: URI_PATTERN,
       slug: '[a-zA-Z\\d_-]+',
-    
+
       // types from draft-0[67] (?)
       'uri-reference': `${URI_PATTERN}${PARAM_PATTERN}`,
       'uri-template': URI_PATTERN.replace('(?:', '(?:/\\{[a-z][:a-zA-Z0-9-]*\\}|'),
       'json-pointer': `(/(?:${FRAGMENT.replace(']*', '/]*')}|~[01]))+`,
-    
+
       // some types from https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1.md#data-types (?)
       uuid: '^(?:urn:uuid:)?[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$',
   };
@@ -24556,7 +24556,7 @@ function extend() {
       if (optionAPI('useExamplesValue') && 'example' in schema) {
         var result = validateSchema(schema, schema.example);
 
-        // Use example only if valid 
+        // Use example only if valid
         if (result && result.length === 0) {
           return schema.example;
         }

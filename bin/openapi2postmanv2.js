@@ -61,7 +61,7 @@ swaggerData;
  */
 function writetoFile(prettyPrintFlag, file, collection, sourceMapFile, sourceMap) {
   if (prettyPrintFlag) {
-    fs.writeFile(file, JSON.stringify(collection, null, 4), (err) => {
+    fs.writeFile(file, JSON.stringify(collection, null, 2), (err) => {
       if (err) { console.log('Could not write to file', err); }
       console.log('Conversion successful', 'Collection written to file');
     });
